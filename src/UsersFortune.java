@@ -15,22 +15,15 @@ public class UsersFortune {
 		System.out.println("Please enter your last name:");
 		String lastName = input.nextLine();
 		System.out.println("Please enter your age:");
-		int userAge = input.nextInt();	
+		int userAge = input.nextInt();
 		input.nextLine();
-		System.out.println("What is your favourite ROYGBIV?:");
-		String favColor = input.nextLine();	
+		System.out.println("What is your favourite ROYGBIV color?:");
+		String favColor = input.nextLine();
 
-			while(favColor.toLowerCase().equals("help")) {
-				System.out.println("The ROYGBIV colors are red, orange, yellow, green, blue, indigo, violet. ");
-			}
-		
-		
-
-//		if (userAge < 0) {
-//		}
-//		System.out.println("Invalid age!");
-//		System.out.println("Please re-enter your age:");
-//		input.nextInt();
+		while (favColor.toLowerCase().equals("help")) {
+			System.out.println("The ROYGBIV colors are red, orange, yellow, green, blue, indigo, violet. ");
+			favColor = input.nextLine();
+		}
 
 		System.out.println("Please enter your birth month (as an \'int\'):");
 		int userBirthMonth = input.nextInt();
@@ -116,7 +109,7 @@ public class UsersFortune {
 			bankBal = 86.23;
 		}
 
-		System.out.println(firstName.toLowerCase() + " " + lastName.toLowerCase() + " will retire in " + ageOfRetire + " years with "
+		System.out.println(firstName + " " + lastName + " will retire in " + ageOfRetire + " years with "
 				+ money.format(bankBal) + " in the bank, " + "\n a vacation home in " + homeLocation
 				+ ", and travel by " + modeOfTransport + ".");
 		input.close();
