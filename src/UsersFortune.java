@@ -12,63 +12,90 @@ public class UsersFortune {
 
 		System.out.println("Please enter your first name:");
 		String firstName = input.nextLine();
+
+		if (firstName.isEmpty()) {
+			System.out.println("Invalid entry! Please re-enter your first name: ");
+			firstName = input.nextLine();
+		}
 		System.out.println("Please enter your last name:");
 		String lastName = input.nextLine();
-		System.out.println("Please enter your age:");
-		int userAge = input.nextInt();
-		input.nextLine();
-		System.out.println("What is your favourite ROYGBIV color?:");
-		String favColor = input.nextLine();
 
-		while (favColor.toLowerCase().equals("help")) {
+		if (lastName.isEmpty()) {
+			System.out.println("Invalid entry! Please re-enter your last name: ");
+			lastName = input.nextLine();
+		}
+
+		// Validate user input not to enter less than zero or null for any integer
+		// inputs.
+		System.out.println("Please enter your age:");
+		String userAge = input.nextLine();
+
+		if (userAge.isEmpty() || Integer.parseInt(userAge) < 0) {
+			System.out.println("Invalid entry! Please re-enter your age: ");
+			userAge = input.nextLine();
+		}
+
+		System.out.println("What is your favourite ROYGBIV color;" + "If you don't know what is ROYGBIV type \"help\"");
+		String favColor = input.nextLine();
+		favColor = favColor.toLowerCase();
+
+		if (favColor.isEmpty()) {
+			System.out.println(
+					"Invalid entry! Please re-enter your favorite color \nIf you don't know what is ROYGBIV type \"help\": ");
+			favColor = input.nextLine();
+		}
+		// user enters capital or lowercase letters for favorite colors.
+		while (favColor.equalsIgnoreCase("help") || favColor.isEmpty()) {
 			System.out.println("The ROYGBIV colors are red, orange, yellow, green, blue, indigo, violet. ");
 			favColor = input.nextLine();
 		}
 
+		// checks if user enters an Integer.
 		System.out.println("Please enter your birth month (as an \'int\'):");
-		int userBirthMonth = input.nextInt();
+		String userBirthMonth = input.nextLine();
 
+		if (userBirthMonth.isEmpty() || Integer.parseInt(userBirthMonth) < 0) {
+			System.out.println("Invalid entry! Please re-enter your birth month: ");
+			userBirthMonth = input.nextLine();
+		}
+		// checks if user enters an Integer.
 		System.out.println("Please enter the number of your siblings:");
-		int noOfSiblings = input.nextInt();
+		String noOfSiblings = input.nextLine();
 
-		int ageOfRetire = userAge;
+		if (noOfSiblings.isEmpty() || Integer.parseInt(noOfSiblings) < 0) {
+			System.out.println("Invalid entry! Please re-enter the number of siblings: ");
+			noOfSiblings = input.nextLine();
+		}
 
+		// Initialize the working variables;
+		int ageOfRetire = Integer.parseInt(userAge);
 		String homeLocation = null;
-
 		double bankBal = 0;
-
 		String modeOfTransport = null;
 
-		if (!(userAge % 2 == 0)) {
+		//
+		if ((Integer.parseInt(userAge)) % 2 == 0) {
 			ageOfRetire = 70;
 		} else {
 			ageOfRetire = 69;
 		}
-
-		if (noOfSiblings < 0) {
-			System.out.println("Bad location!");
-			System.out.println("Please re-enter your location");
-
+		switch (Integer.parseInt(noOfSiblings)) {
+		case 0:
+			homeLocation = "Mombasa, Kenya";
+			break;
+		case 1:
+			homeLocation = "Addis Ababba, Ethiopia";
+			break;
+		case 2:
+			homeLocation = "Lagos, Nigeria";
+			break;
+		case 3:
+			homeLocation = "Cairo, Egypt";
+			break;
+		default:
+			homeLocation = "Nairobi, Kenya";
 		}
 
-		else {
-			switch (noOfSiblings) {
-			case 0:
-				homeLocation = "Nairobi, Kenya";
-				break;
-			case 1:
-				homeLocation = "Addis Ababba, Ethiopia";
-				break;
-			case 2:
-				homeLocation = "Lagos, Nigeria";
-				break;
-			case 3:
-				homeLocation = "Kigali, Rwanda";
-				break;
-			default:
-				homeLocation = "Mogadishu, Somalia";
-			}
-		}
 		switch (favColor) {
 		case "red":
 			modeOfTransport = "Maserati";
@@ -86,32 +113,33 @@ public class UsersFortune {
 			modeOfTransport = "Ford Focus";
 			break;
 		case "indigo":
-			modeOfTransport = "Mahindra";
+			modeOfTransport = "Bugatti";
 			break;
 		default:
-			modeOfTransport = "Isuzu 4WD";
+			modeOfTransport = "Porsche";
 			break;
 		}
 
-		if (userBirthMonth < 1 || userBirthMonth > 12) {
+		if (Integer.parseInt(userBirthMonth) < 1 || Integer.parseInt(userBirthMonth) > 12) {
 			bankBal = 0.00;
 		}
 
-		else if (userBirthMonth >= 1 && userBirthMonth <= 4) {
+		else if (Integer.parseInt(userBirthMonth) >= 1 && Integer.parseInt(userBirthMonth) <= 4) {
 			bankBal = 256000.76;
 		}
 
-		else if (userBirthMonth >= 5 && userBirthMonth <= 8) {
+		else if (Integer.parseInt(userBirthMonth) >= 5 && Integer.parseInt(userBirthMonth) <= 8) {
 			bankBal = 3687105.42;
 		}
 
-		else if (userBirthMonth >= 9 && userBirthMonth <= 12) {
+		else if (Integer.parseInt(userBirthMonth) >= 9 && Integer.parseInt(userBirthMonth) <= 12) {
 			bankBal = 86.23;
 		}
 
 		System.out.println(firstName + " " + lastName + " will retire in " + ageOfRetire + " years with "
-				+ money.format(bankBal) + " in the bank, " + "\n a vacation home in " + homeLocation
-				+ ", and travel by " + modeOfTransport + ".");
+				+ money.format(bankBal) + " in the bank, " + "\na vacation home in " + homeLocation + ", and travel by "
+				+ modeOfTransport + ".");
+
 		input.close();
 
 	}
